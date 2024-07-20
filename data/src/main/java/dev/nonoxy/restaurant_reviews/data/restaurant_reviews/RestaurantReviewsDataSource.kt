@@ -13,16 +13,17 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
+import javax.inject.Inject
 
-class RestaurantReviewsDataSource(
+class RestaurantReviewsDataSource @Inject constructor(
     private val restaurantReviewsApi: RestaurantReviewsApi
 ) {
     fun getRestaurants(): Flow<RequestResult<List<Restaurant>>> {
         val apiRequest = flow { emit(restaurantReviewsApi.getRestaurants()) }.flowOn(Dispatchers.IO)
             .map { result ->
                 result.toRequestResult()
-                    .map { restaurants ->
-                        restaurants.map { it.toRestaurant() }
+                    .map { restaurantsDTO ->
+                        restaurantsDTO.restaurants.map { it.toRestaurant() }
                     }
             }.flowOn(Dispatchers.Default)
 
