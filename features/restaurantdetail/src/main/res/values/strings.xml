@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="restaurant">Ресторан</string>
+    <string name="no_reviews">Нет отзывов</string>
+    <string name="description">Описание</string>
+    <string name="error_happen">Произошла ошибка</string>
+    <string name="check_ur_internet_connection">Проверьте соединение с интернетом</string>
+</resources>
