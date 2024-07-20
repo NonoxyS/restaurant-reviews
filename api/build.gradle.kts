@@ -10,6 +10,7 @@ java {
 }
 
 dependencies {
+    implementation(libs.kotlinx.coroutines.core)
     implementation(libs.retrofit)
     implementation(libs.retrofit.adapters.result)
     implementation(libs.retrofit.converter.kotlinx.serialization)

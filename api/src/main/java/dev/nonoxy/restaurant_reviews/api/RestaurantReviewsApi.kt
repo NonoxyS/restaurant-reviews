@@ -4,6 +4,7 @@ import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFact
 import com.skydoves.retrofit.adapters.result.ResultCallAdapterFactory
 import dev.nonoxy.restaurant_reviews.api.models.RestaurantDTO
 import dev.nonoxy.restaurant_reviews.api.models.RestaurantDetailDTO
+import dev.nonoxy.restaurant_reviews.api.models.RestaurantsDTO
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
@@ -16,19 +17,19 @@ import retrofit2.http.Path
 
 interface RestaurantReviewsApi {
     @GET("internship/organizations/category/1/organizations/")
-    suspend fun getRestaurants(): Result<List<RestaurantDTO>>
+    suspend fun getRestaurants(): Result<RestaurantsDTO>
 
     @GET("internship/organization/{id}")
     suspend fun getRestaurantById(
         @Path("id") id: Int
     ): Result<RestaurantDetailDTO>
 
-    @POST("/internship/organization/{id}/favorite/")
+    @POST("internship/organization/{id}/favorite/")
     suspend fun addToFavorites(
         @Path("id") id: Int
     ): Result<Unit>
 
-    @DELETE("/internship/organization/{id}/favorite/")
+    @DELETE("internship/organization/{id}/favorite/")
     suspend fun removeFromFavorites(
         @Path("id") id: Int
     ): Result<Unit>

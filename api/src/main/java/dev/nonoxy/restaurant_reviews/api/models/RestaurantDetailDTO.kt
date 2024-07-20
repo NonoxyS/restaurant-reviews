@@ -1,7 +1,9 @@
 package dev.nonoxy.restaurant_reviews.api.models
 
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 class RestaurantDetailDTO(
     @SerialName("id") val id: Int,
     @SerialName("name") val name: String,
