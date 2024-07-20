@@ -96,6 +96,8 @@ dependencies {
 
     implementation(libs.kotlinx.serialization.json)
 
+    implementation(libs.coil.compose)
+
     implementation(project(":api"))
     implementation(project(":data"))
     implementation(project(":features:theme"))
