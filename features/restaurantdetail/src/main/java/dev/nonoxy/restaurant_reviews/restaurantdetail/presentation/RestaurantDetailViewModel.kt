@@ -41,7 +41,7 @@ class RestaurantDetailViewModel @Inject constructor(
         viewModelScope.launch {
             getRestaurantDetailUseCase.execute(restaurantId = restaurantId).collect { result ->
                 when (result) {
-                    is RequestResult.Error -> viewState = RestaurantDetailViewState.Error
+                    is RequestResult.Error -> viewState = RestaurantDetailViewState.Error(restaurantId)
                     is RequestResult.InProgress -> viewState = RestaurantDetailViewState.Loading
                     is RequestResult.Success -> {
                         viewState =
@@ -55,8 +55,8 @@ class RestaurantDetailViewModel @Inject constructor(
     private fun addToFavorites() {
         viewModelScope.launch {
             when (val currentState = viewState) {
-                RestaurantDetailViewState.Error -> viewState = currentState
                 RestaurantDetailViewState.Loading -> viewState = currentState
+                is RestaurantDetailViewState.Error -> viewState = currentState
                 is RestaurantDetailViewState.Display -> {
                     viewState = currentState.copy(
                         restaurantDetail = currentState.restaurantDetail.copy(isFavorite = true)
@@ -75,6 +75,7 @@ class RestaurantDetailViewModel @Inject constructor(
                                     )
                                 )
                             }
+
                             is RequestResult.Error -> {
                                 // В случае ошибки возвращаем предыдущее состояние
                                 // И кидаем Action для тоста
@@ -91,7 +92,7 @@ class RestaurantDetailViewModel @Inject constructor(
     private fun removeFromFavorites() {
         viewModelScope.launch {
             when (val currentState = viewState) {
-                RestaurantDetailViewState.Error -> viewState = currentState
+                is RestaurantDetailViewState.Error -> viewState = currentState
                 RestaurantDetailViewState.Loading -> viewState = currentState
                 is RestaurantDetailViewState.Display -> {
                     viewState = currentState.copy(
@@ -111,6 +112,7 @@ class RestaurantDetailViewModel @Inject constructor(
                                     )
                                 )
                             }
+
                             is RequestResult.Error -> {
                                 // В случае ошибки возвращаем предыдущее состояние
                                 // И кидаем Action для тоста

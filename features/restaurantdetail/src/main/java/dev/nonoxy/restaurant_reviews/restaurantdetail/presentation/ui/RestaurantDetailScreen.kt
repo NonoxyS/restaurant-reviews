@@ -23,7 +23,8 @@ fun RestaurantDetailScreen(
     val viewAction by restaurantDetailViewModel.viewActions().collectAsState(initial = null)
 
     when (val currentState = viewState) {
-        RestaurantDetailViewState.Error -> RestaurantDetailErrorView(
+        is RestaurantDetailViewState.Error -> RestaurantDetailErrorView(
+            restaurantId = currentState.restaurantId ,
             eventHandler = restaurantDetailViewModel::obtainEvent
         )
 
