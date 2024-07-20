@@ -1,6 +1,5 @@
 package dev.nonoxy.restaurant_reviews.restaurantdetail.presentation.ui.views
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,6 +8,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -33,17 +33,21 @@ internal fun RestaurantDetailTopBarView(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
-            Icon(
-                imageVector = ImageVector.vectorResource(R.drawable.ic_back_arrow),
-                contentDescription = null,
-                modifier = Modifier
-                    .size(24.dp)
-                    .align(Alignment.CenterStart)
-                    .clickable { onNavigateBackClicked() }
-            )
+            IconButton(
+                onClick = { onNavigateBackClicked() },
+                modifier = Modifier.size(24.dp).align(Alignment.CenterStart)
+            ) {
+                Icon(
+                    imageVector = ImageVector.vectorResource(R.drawable.ic_back_arrow),
+                    contentDescription = null,
+                    tint = RestaurantReviewsTheme.colors.primaryText,
+                    modifier = Modifier.size(24.dp)
+                )
+            }
             Text(
                 text = stringResource(R.string.restaurant),
                 style = RestaurantReviewsTheme.typography.titleSmall,
+                color = RestaurantReviewsTheme.colors.primaryText,
                 modifier = Modifier.align(Alignment.Center)
             )
         }
