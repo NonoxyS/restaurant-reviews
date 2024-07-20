@@ -6,6 +6,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dev.nonoxy.restaurant_reviews.BuildConfig
 import dev.nonoxy.restaurant_reviews.api.RestaurantReviewsApi
+import dev.nonoxy.restaurant_reviews.common.eventbus.EventBusController
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import javax.inject.Singleton
@@ -36,5 +37,11 @@ object AppModule {
             apiKey = BuildConfig.RESTAURANT_REVIEWS_API_KEY,
             okHttpClient = okHttpClient
         )
+    }
+
+    @Provides
+    @Singleton
+    fun provideEventBusController(): EventBusController {
+        return EventBusController()
     }
 }

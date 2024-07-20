@@ -1,6 +1,5 @@
 package dev.nonoxy.restaurant_reviews.restaurants.presentation.ui.views
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -10,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -42,9 +42,7 @@ internal fun RestaurantItemView(
             contentDescription = null,
             imageLoader = LocalContext.current.imageLoader,
             contentScale = ContentScale.FillWidth,
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(160.dp)
+            modifier = Modifier.height(160.dp)
         )
         Spacer(modifier = Modifier.height(14.dp))
         RestaurantNameAndFavoriteRow(
@@ -73,17 +71,20 @@ private fun RestaurantNameAndFavoriteRow(
             color = RestaurantReviewsTheme.colors.primaryText
         )
         Spacer(modifier = Modifier.weight(1f))
-        Icon(
-            imageVector = ImageVector.vectorResource(
-                if (restaurant.isFavorite) R.drawable.favorite
-                else R.drawable.not_favorite
-            ),
-            contentDescription = null,
-            tint = RestaurantReviewsTheme.colors.primaryIcon,
-            modifier = Modifier
-                .size(24.dp)
-                .clickable { onFavoriteIconClick(restaurant) }
-        )
+        IconButton(
+            onClick = { onFavoriteIconClick(restaurant) },
+            modifier = Modifier.size(24.dp)
+        ) {
+            Icon(
+                imageVector = ImageVector.vectorResource(
+                    if (restaurant.isFavorite) R.drawable.ic_favorite
+                    else R.drawable.ic_not_favorite
+                ),
+                contentDescription = null,
+                tint = RestaurantReviewsTheme.colors.primaryIcon,
+                modifier = Modifier.size(24.dp)
+            )
+        }
     }
 }
 
@@ -96,7 +97,7 @@ private fun RestaurantShortInfoRow(restaurant: RestaurantUI) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
-            imageVector = ImageVector.vectorResource(R.drawable.star),
+            imageVector = ImageVector.vectorResource(R.drawable.ic_star),
             contentDescription = null,
             tint = restaurant.rate?.let { RestaurantReviewsTheme.colors.primaryIcon } ?: Color.Gray,
             modifier = Modifier.size(16.dp)

@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import dev.nonoxy.restaurant_reviews.theme.ui.theme.RestaurantReviewsTheme
 
 @Composable
 internal fun RestaurantsLoadingView() {
@@ -18,6 +19,9 @@ internal fun RestaurantsLoadingView() {
             .padding(horizontal = 16.dp),
         contentAlignment = Alignment.Center
     ) {
-        CircularProgressIndicator(modifier = Modifier.size(48.dp))
+        CircularProgressIndicator(
+            modifier = Modifier.size(48.dp),
+            color = RestaurantReviewsTheme.colors.primaryIcon
+        )
     }
 }

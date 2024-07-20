@@ -10,6 +10,7 @@ data class RestaurantReviewsColors(
     val secondaryText: Color,
     val iconText: Color,
     val primaryIcon: Color,
+    val secondaryIcon: Color
 )
 
 internal val LightPalette = RestaurantReviewsColors(
@@ -19,6 +20,7 @@ internal val LightPalette = RestaurantReviewsColors(
     secondaryText = Color(0xFF7F7F7F),
     iconText = Color.White,
     primaryIcon = Color(0xFF32ADE6),
+    secondaryIcon = Color(0xFFE5E5EA)
 )
 
 internal val LocalRestaurantReviewsColor =

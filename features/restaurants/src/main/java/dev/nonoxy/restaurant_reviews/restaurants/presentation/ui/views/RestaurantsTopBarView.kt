@@ -1,6 +1,5 @@
 package dev.nonoxy.restaurant_reviews.restaurants.presentation.ui.views
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,6 +9,7 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -42,7 +42,8 @@ internal fun RestaurantsTopBarView(
                 .fillMaxSize()
         ) {
             Text(
-                text = stringResource(R.string.restaurants),
+                text = if (inFavoritesMode) stringResource(R.string.favorites)
+                else stringResource(R.string.restaurants),
                 style = RestaurantReviewsTheme.typography.titleSmall,
                 color = RestaurantReviewsTheme.colors.primaryText,
                 modifier = Modifier.align(Alignment.Center)
@@ -51,15 +52,20 @@ internal fun RestaurantsTopBarView(
                 modifier = Modifier.align(Alignment.CenterEnd),
                 contentAlignment = Alignment.Center
             ) {
-                Icon(
-                    imageVector = ImageVector.vectorResource(
-                        if (inFavoritesMode) R.drawable.favorite
-                        else R.drawable.not_favorite
-                    ),
-                    contentDescription = null,
-                    tint = RestaurantReviewsTheme.colors.primaryIcon,
-                    modifier = Modifier.size(30.dp).clickable { onFavoriteFilterClick() }
-                )
+                IconButton(
+                    onClick = { onFavoriteFilterClick() },
+                    modifier = Modifier.size(32.dp)
+                ) {
+                    Icon(
+                        imageVector = ImageVector.vectorResource(
+                            if (inFavoritesMode) R.drawable.ic_favorite
+                            else R.drawable.ic_not_favorite
+                        ),
+                        contentDescription = null,
+                        tint = RestaurantReviewsTheme.colors.primaryIcon,
+                        modifier = Modifier.size(32.dp)
+                    )
+                }
                 if (favoritesCount in 1..99) {
                     Text(
                         text = "$favoritesCount",
