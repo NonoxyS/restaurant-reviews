@@ -21,4 +21,9 @@ dependencyResolutionManagement {
 
 rootProject.name = "Restaurant Reviews"
 include(":app")
- 
+include(":data")
+include(":api")
+include(":features:restaurants")
+include(":features:common")
+include(":features:theme")
+include(":features:restaurantdetail")
